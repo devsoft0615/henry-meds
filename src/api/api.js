@@ -187,35 +187,35 @@ export const getProviderReservations = (date, provider) => {
   });
 };
 
-// export const getClientReservations = (date, client) => {
-//   return new Promise((resolve) => {
-//     setTimeout(() => {
-//       resolve(
-//         reservations
-//           .filter((r) => r.date === date && r.client === client)
-//           .sort((a, b) => {
-//             if (a.time < b.time) {
-//               return -1;
-//             }
-//             if (a.time > b.time) {
-//               return 1;
-//             }
-//             return 0;
-//           })
-//           .map((a) => ({
-//             id: a.id,
-//             from: a.time,
-//             to: dayjs(date + a.time)
-//               .add(15, "m")
-//               .format("HH:mm"),
-//             provider: providers.find((c) => c.id === a.provider),
-//             status:
-//               a.status || (dayjs(a.timestamp).add(30, "m") >= dayjs() ? 0 : 2),
-//           }))
-//       );
-//     }, 1000);
-//   });
-// };
+export const getClientReservations = (date, client) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(
+        reservations
+          .filter((r) => r.date === date && r.client === client)
+          .sort((a, b) => {
+            if (a.time < b.time) {
+              return -1;
+            }
+            if (a.time > b.time) {
+              return 1;
+            }
+            return 0;
+          })
+          .map((a) => ({
+            id: a.id,
+            from: a.time,
+            to: dayjs(date + a.time)
+              .add(15, "m")
+              .format("HH:mm"),
+            provider: providers.find((c) => c.id === a.provider),
+            status:
+              a.status || (dayjs(a.timestamp).add(30, "m") >= dayjs() ? 0 : 2),
+          }))
+      );
+    }, 1000);
+  });
+};
 
 const checkBookable = (date, time, provider) => {
   if (dayjs().add(24, "hours") >= dayjs(date + time)) return false;
@@ -247,73 +247,73 @@ const checkBookable = (date, time, provider) => {
   return true;
 };
 
-// export const getAvailableTimes = (date, provider) => {
-//   return new Promise((resolve) => {
-//     setTimeout(() => {
-//       resolve(
-//         new Array(96)
-//           .fill(0)
-//           .map(
-//             (_, i) =>
-//               `${(i / 4).toFixed(0).padStart(2, "0")}:${((i % 4) * 15)
-//                 .toFixed(0)
-//                 .padStart(2, "0")}`
-//           )
-//           .filter((time) => checkBookable(date, time, provider))
-//           .sort()
-//       );
-//     }, 1000);
-//   });
-// };
+export const getAvailableTimes = (date, provider) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(
+        new Array(96)
+          .fill(0)
+          .map(
+            (_, i) =>
+              `${(i / 4).toFixed(0).padStart(2, "0")}:${((i % 4) * 15)
+                .toFixed(0)
+                .padStart(2, "0")}`
+          )
+          .filter((time) => checkBookable(date, time, provider))
+          .sort()
+      );
+    }, 1000);
+  });
+};
 
-// export const bookReservation = (date, provider, client, time) => {
-//   return new Promise((resolve, reject) => {
-//     setTimeout(() => {
-//       if (dayjs().add(24, "hours") >= dayjs(date + time)) {
-//         reject(
-//           new Error("Reservations must be made at least 24 hours in advance")
-//         );
-//         return;
-//       }
-//       const providerAvail = avail.filter(
-//         (a) => a.provider === provider && a.date === date
-//       );
-//       if (!providerAvail.length) {
-//         reject(new Error("Provider is not available on this date"));
-//         return;
-//       }
-//       let available = false;
-//       for (const a of providerAvail) {
-//         if (a.from <= time && time < a.to) {
-//           available = true;
-//           break;
-//         }
-//       }
-//       if (!available) {
-//         reject(new Error("Provider is not available at this time"));
-//         return;
-//       }
-//       if (
-//         reservations.filter(
-//           (r) => r.date === date && r.provider === provider && r.time === time
-//         ).length
-//       ) {
-//         reject(new Error("Reservation already exists"));
-//         return;
-//       }
-//       reservations.push({
-//         id: reservations.length + 1,
-//         provider: provider,
-//         client: client,
-//         date: date,
-//         time: time,
-//         status: 0,
-//         timestamp: dayjs().toISOString(),
-//       });
-//       resolve(reservations);
-//     }, 1000);
-//   });
-// };
+export const bookReservation = (date, provider, client, time) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (dayjs().add(24, "hours") >= dayjs(date + time)) {
+        reject(
+          new Error("Reservations must be made at least 24 hours in advance")
+        );
+        return;
+      }
+      const providerAvail = avail.filter(
+        (a) => a.provider === provider && a.date === date
+      );
+      if (!providerAvail.length) {
+        reject(new Error("Provider is not available on this date"));
+        return;
+      }
+      let available = false;
+      for (const a of providerAvail) {
+        if (a.from <= time && time < a.to) {
+          available = true;
+          break;
+        }
+      }
+      if (!available) {
+        reject(new Error("Provider is not available at this time"));
+        return;
+      }
+      if (
+        reservations.filter(
+          (r) => r.date === date && r.provider === provider && r.time === time
+        ).length
+      ) {
+        reject(new Error("Reservation already exists"));
+        return;
+      }
+      reservations.push({
+        id: reservations.length + 1,
+        provider: provider,
+        client: client,
+        date: date,
+        time: time,
+        status: 0,
+        timestamp: dayjs().toISOString(),
+      });
+      resolve(reservations);
+    }, 1000);
+  });
+};
 
 export const getProviders = () => {
   return new Promise((resolve) => {
@@ -323,28 +323,28 @@ export const getProviders = () => {
   });
 };
 
-// export const confirmReservation = (reservationId) => {
-//   return new Promise((resolve, reject) => {
-//     setTimeout(() => {
-//       const reservation = reservations.find((r) => r.id === reservationId);
-//       if (reservation.status !== 0) {
-//         reject("Reservation already confirmed");
-//         return;
-//       }
-//       if (dayjs(reservation.timestamp).add(30, "m") < dayjs()) {
-//         reject("Reservation must be confirmed within 30 minutes");
-//         return;
-//       }
-//       reservation.status = 1;
-//       resolve({
-//         id: reservation.id,
-//         from: reservation.time,
-//         to: dayjs(reservation.date + reservation.time)
-//           .add(15, "m")
-//           .format("HH:mm"),
-//         provider: providers.find((c) => c.id === reservation.provider),
-//         status: reservation.status,
-//       });
-//     }, 1000);
-//   });
-// };
+export const confirmReservation = (reservationId) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const reservation = reservations.find((r) => r.id === reservationId);
+      if (reservation.status !== 0) {
+        reject("Reservation already confirmed");
+        return;
+      }
+      if (dayjs(reservation.timestamp).add(30, "m") < dayjs()) {
+        reject("Reservation must be confirmed within 30 minutes");
+        return;
+      }
+      reservation.status = 1;
+      resolve({
+        id: reservation.id,
+        from: reservation.time,
+        to: dayjs(reservation.date + reservation.time)
+          .add(15, "m")
+          .format("HH:mm"),
+        provider: providers.find((c) => c.id === reservation.provider),
+        status: reservation.status,
+      });
+    }, 1000);
+  });
+};
