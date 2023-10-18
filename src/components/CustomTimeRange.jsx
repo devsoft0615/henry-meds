@@ -1,5 +1,5 @@
 import { TimePicker } from "antd";
-import { API_TIME_FORMAT } from "../../constants/datetime";
+import { API_TIME_FORMAT } from "../constants/datetime";
 
 const { RangePicker } = TimePicker;
 

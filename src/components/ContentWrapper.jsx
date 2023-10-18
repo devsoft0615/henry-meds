@@ -1,5 +1,5 @@
 import { Col, Row } from "antd";
-import { GoBack } from "../GoBack/GoBack";
+import { GoBack } from "./GoBack";
 
 export const ContentWrapper = ({ children }) => {
   return (

@@ -3,30 +3,30 @@ import dayjs from "dayjs";
 let providers = [
   {
     id: 1,
-    name: "William Rincon",
+    name: "Brandon Shores",
     phone: "111-111-1111",
-    email: "william@email.com",
+    email: "brandon@gmail.com",
   },
   {
     id: 2,
-    name: "Eric Belair",
+    name: "Eric Shores",
     phone: "222-222-2222",
-    email: "eric@email.com",
+    email: "eric@gmail.com",
   },
 ];
 
 let clients = [
   {
     id: 1,
-    name: "Phil Tome",
+    name: "Philip Tome",
     phone: "333-333-3333",
-    email: "phil@email.com",
+    email: "philip@gmail.com",
   },
   {
     id: 2,
     name: "John Doe",
     phone: "444-444-4444",
-    email: "john@email.com",
+    email: "john@gmail.com",
   },
 ];
 

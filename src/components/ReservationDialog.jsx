@@ -1,5 +1,5 @@
 import { Descriptions, Modal } from "antd";
-import { RESERVATION_STATUS } from "../../constants/reservation";
+import { RESERVATION_STATUS } from "../constants/reservation";
 
 const { Item } = Descriptions;
 
