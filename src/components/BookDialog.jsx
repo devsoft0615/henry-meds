@@ -1,7 +1,7 @@
 import { Modal, Select, message } from "antd";
 import { useEffect, useState } from "react";
-import { API_DATE_FORMAT, API_TIME_FORMAT } from "../../constants/datetime";
-import { getAvailableTimes, getProviders } from "../../api/api";
+import { API_DATE_FORMAT, API_TIME_FORMAT } from "../constants/datetime";
+import { getAvailableTimes, getProviders } from "../api/api";
 
 export const BookDialog = ({ open, onClose, onOk, date }) => {
   const [time, setTime] = useState();

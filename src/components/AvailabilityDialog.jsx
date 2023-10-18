@@ -1,7 +1,7 @@
 import { Modal } from "antd";
-import { CustomTimeRange } from "../CustomTimeRange";
+import { CustomTimeRange } from "./CustomTimeRange";
 import { useState } from "react";
-import { API_TIME_FORMAT } from "../../constants/datetime";
+import { API_TIME_FORMAT } from "../constants/datetime";
 
 export const AvailabilityDialog = ({ date, open, onOk, onClose }) => {
   const [[from, to], setTimes] = useState([]);
